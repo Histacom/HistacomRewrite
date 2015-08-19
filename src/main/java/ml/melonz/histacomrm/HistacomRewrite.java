@@ -1,3 +1,26 @@
+/*
+ * This file is part of Histacom 2, licensed under the MIT License (MIT).
+ *
+ * Copyright (c) 2015, Histacom Development Team <http://histacom.jamierocks.uk/>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package ml.melonz.histacomrm;
 
 import java.awt.Color;
@@ -100,22 +123,26 @@ public class HistacomRewrite {
 		startButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/win95StartButton.png")));
+				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+						"/ml/melonz/histacomrm/win95StartButton.png")));
 				infoBox("mlg420 gitrekt", "Coming soon!");
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/win95StartButton-Hover.png")));
+				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+						"/ml/melonz/histacomrm/win95StartButton-Hover.png")));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/win95StartButton.png")));
+				startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+						"/ml/melonz/histacomrm/win95StartButton.png")));
 			}
 		});
 		taskbar.add(startButton);
-		startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/win95StartButton.png")));
+		startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+				"/ml/melonz/histacomrm/win95StartButton.png")));
 
 		Font font = new Font("Microsoft Sans Serif", Font.BOLD, 14);
 
@@ -128,7 +155,7 @@ public class HistacomRewrite {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+					initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
 				}
 			}
 		});
@@ -142,7 +169,7 @@ public class HistacomRewrite {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+					initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
 				}
 			}
 		});
@@ -182,7 +209,7 @@ public class HistacomRewrite {
 					.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
 			winver95.getContentPane().add(winverico);
 
-			JLabel lblcopyright = new JLabel("© 1995, Microsoft Corp.");
+			JLabel lblcopyright = new JLabel("ï¿½ 1995, Microsoft Corp.");
 			lblcopyright.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
 			lblcopyright.setBounds(73, 109, 177, 26);
 			winver95.getContentPane().add(lblcopyright);
