@@ -1,5 +1,5 @@
 /*
- * This file is part of Histacom 2, licensed under the MIT License (MIT).
+ * This file is part of Histacom 2, licensed under the MIT License (MIT)
  *
  * Copyright (c) 2015, Histacom Development Team <http://histacom.jamierocks.uk/>
  *
@@ -21,173 +21,372 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package ml.melonz.histacomrm;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import com.sun.glass.events.WindowEvent;
 
 public class HistacomRewrite {
 
     public static boolean isMaximised;
-    // JFrames
+    public static String language;
     static JFrame mainmenu;
+    static JFrame langselect;
     static JFrame winver95;
     static JFrame os;
-    // Others
     static Point mouseDownCompCoords;
     static JLabel startGame;
     static JLabel HistacomRandomMelonImg;
+    
+    public static void initMainMenu(String title, String startButtonImg, Boolean resizable, String backgroundimg, int posX, int posY, int sizeX, int sizeY, int defaultClose, String startButtonToolTip, int startButtonPosX, int startButtonPosY, int startButtonSizeX, int startButtonSizeY) {
+            mainmenu = new JFrame();
+            mainmenu.setTitle(title);
+            mainmenu.setIconImage(Toolkit.getDefaultToolkit().getImage(HistacomRewrite.class.getResource(backgroundimg)));
+            mainmenu.setBounds(posX, posY, sizeX, sizeY);
+            mainmenu.setResizable(resizable);
+            mainmenu.setDefaultCloseOperation(defaultClose);
+            mainmenu.getContentPane().setLayout(null);
 
-    public static void initMainMenu(String title, String startButtonImg, Boolean resizable, String backgroundimg,
-            int posX, int posY, int sizeX, int sizeY, int defaultClose, String startButtonToolTip, int startButtonPosX,
-            int startButtonPosY, int startButtonSizeX, int startButtonSizeY) {
-        mainmenu = new JFrame();
-        mainmenu.setTitle(title);
-        mainmenu.setIconImage(Toolkit.getDefaultToolkit().getImage(HistacomRewrite.class.getResource(backgroundimg)));
-        mainmenu.setBounds(posX, posY, sizeX, sizeY);
-        mainmenu.setDefaultCloseOperation(defaultClose);
-        mainmenu.getContentPane().setLayout(null);
-
-        JLabel startGame = new JLabel("");
-        startGame.setToolTipText(startButtonToolTip);
-        startGame.setIcon(new ImageIcon(HistacomRewrite.class.getResource(startButtonImg)));
-        startGame.setBounds(startButtonPosX, startButtonPosY, startGame.getIcon().getIconWidth(),
-                startGame.getIcon().getIconHeight());
-        startGame.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                try {
-                    initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Weed");
-                } catch (Exception e1) {
-                    e1.printStackTrace();
+            JLabel startGame = new JLabel("");
+            startGame.setToolTipText(startButtonToolTip);
+            startGame.setIcon(new ImageIcon(HistacomRewrite.class.getResource(startButtonImg)));
+            startGame.setBounds(startButtonPosX, startButtonPosY, startGame.getIcon().getIconWidth(),
+                    startGame.getIcon().getIconHeight());
+            startGame.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    try {
+                    	if (language == "English") {
+                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Shows all of your installed programs.");
+                    	}
+                    	else if (language == "Italiano") {
+                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Ti fà vedere tuttle le applicazioni installate.");
+                    	}
+                    	else if (language == "Nederlands") {
+                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Laat alle programma's die geïnstalleerd zijn zien.");
+                    	}
+                        
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 }
-            }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                startGame.setIcon(
-                        new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/msnewgame.png")));
-            }
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    startGame.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/msnewgame.png")));
+                }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                startGame
-                        .setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/newGame.png")));
-            }
-        });
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    startGame.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/newGame.png")));
+                }
+            });
 
-        mainmenu.getContentPane().add(startGame);
+            mainmenu.getContentPane().add(startGame);
 
-        JLabel HistacomRandomMelonImg = new JLabel("");
-        HistacomRandomMelonImg.setIcon(new ImageIcon(HistacomRewrite.class.getResource(backgroundimg)));
-        HistacomRandomMelonImg.setBounds(0, 0, sizeX, sizeY);
-        mainmenu.getContentPane().add(HistacomRandomMelonImg);
-        mainmenu.setVisible(true);
-    }
+            JLabel HistacomRandomMelonImg = new JLabel("");
+            HistacomRandomMelonImg.setIcon(new ImageIcon(HistacomRewrite.class.getResource(backgroundimg)));
+            HistacomRandomMelonImg.setBounds(0, 0, sizeX, sizeY);
+            mainmenu.getContentPane().add(HistacomRandomMelonImg);
+            mainmenu.setVisible(true);
+    	}
 
     public static void initOS(String title, int defaultClose, Boolean noSound, int taskbarHeight, int barr, int barg,
             int barb, int backr, int backg, int backb, String startToolTip) {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
+    	if (language == "English") {
+    		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
 
-        if (noSound == false) {
-            Sound.win95Start.play();
-        }
-
-        os = new JFrame();
-        os.setTitle(title);
-        os.setUndecorated(true);
-        os.setBounds(100, 100, width, height);
-        os.setLocation(0, 0);
-        os.setDefaultCloseOperation(defaultClose);
-        os.getContentPane().setLayout(null);
-
-        JPanel taskbar = new JPanel();
-        taskbar.setBounds(0, height - taskbarHeight, width, taskbarHeight);
-        taskbar.setBackground((new Color(barr, barg, barb)));
-        os.getContentPane().add(taskbar);
-        taskbar.setLayout(null);
-
-        JLabel startButton = new JLabel("");
-        startButton.setToolTipText(startToolTip);
-        startButton.setBounds(3, 4, 54, 22);
-        startButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
-                        "/ml/melonz/histacomrm/win95StartButton.png")));
-                infoBox("mlg420 gitrekt", "Coming soon!");
+            if (noSound == false) {
+                Sound.win95Start.play();
             }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
-                        "/ml/melonz/histacomrm/win95StartButton-Hover.png")));
-            }
+            os = new JFrame();
+            os.setTitle(title);
+            os.setUndecorated(true);
+            os.setBounds(100, 100, width, height);
+            os.setLocation(0, 0);
+            os.setDefaultCloseOperation(defaultClose);
+            os.getContentPane().setLayout(null);
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
-                        "/ml/melonz/histacomrm/win95StartButton.png")));
-            }
-        });
-        taskbar.add(startButton);
-        startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
-                "/ml/melonz/histacomrm/win95StartButton.png")));
+            JPanel taskbar = new JPanel();
+            taskbar.setBounds(0, height - taskbarHeight, width, taskbarHeight);
+            taskbar.setBackground((new Color(barr, barg, barb)));
+            os.getContentPane().add(taskbar);
+            taskbar.setLayout(null);
 
-        Font font = new Font("Microsoft Sans Serif", Font.BOLD, 14);
-
-        JLabel desktopIco1 = new JLabel("");
-        desktopIco1.setToolTipText("Tells you the Windows version.");
-        desktopIco1.setBounds(23, 0, 38, 41);
-        desktopIco1.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
-        desktopIco1.setFont(font);
-        desktopIco1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getClickCount() == 2 && !e.isConsumed()) {
-                    initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
+            JLabel startButton = new JLabel("");
+            startButton.setToolTipText(startToolTip);
+            startButton.setBounds(3, 4, 54, 22);
+            startButton.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                    infoBox("mlg420 gitrekt", "Coming soon!");
                 }
-            }
-        });
-        os.getContentPane().add(desktopIco1);
 
-        JLabel desktopText1 = new JLabel("<html><font color='white'>winver.exe -tempico</font></html>");
-        desktopText1.setToolTipText("Closes all open windows, exits Windows, and turns off your computer.");
-        desktopText1.setBounds(3, 30, 78, 45);
-        desktopText1.setFont(font);
-        desktopText1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getClickCount() == 2 && !e.isConsumed()) {
-                    initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton-Hover.png")));
                 }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                }
+            });
+            taskbar.add(startButton);
+            startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                    "/ml/melonz/histacomrm/win95StartButton.png")));
+
+            Font font = new Font("Microsoft Sans Serif", Font.BOLD, 14);
+
+            JLabel desktopIco1 = new JLabel("");
+            desktopIco1.setToolTipText("Tells you the Windows version.");
+            desktopIco1.setBounds(23, 0, 38, 41);
+            desktopIco1.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
+            desktopIco1.setFont(font);
+            desktopIco1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopIco1);
+
+            JLabel desktopText1 = new JLabel("<html><font color='white'>winver.exe -tempico</font></html>");
+            desktopText1.setToolTipText("Closes all open windows, exits Windows, and turns off your computer.");
+            desktopText1.setBounds(3, 30, 78, 45);
+            desktopText1.setFont(font);
+            desktopText1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopText1);
+
+            JPanel background = new JPanel();
+            background.setBackground(new Color(backr, backg, backb));
+            background.setBounds(0, 0, width, height);
+            os.getContentPane().add(background);
+            background.setLayout(null);
+
+            os.setVisible(true);
+    	}
+    	
+    	else if (language == "Italiano") {
+    		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
+
+            if (noSound == false) {
+                Sound.win95Start.play();
             }
-        });
-        os.getContentPane().add(desktopText1);
 
-        JPanel background = new JPanel();
-        background.setBackground(new Color(backr, backg, backb));
-        background.setBounds(0, 0, width, height);
-        os.getContentPane().add(background);
-        background.setLayout(null);
+            os = new JFrame();
+            os.setTitle(title);
+            os.setUndecorated(true);
+            os.setBounds(100, 100, width, height);
+            os.setLocation(0, 0);
+            os.setDefaultCloseOperation(defaultClose);
+            os.getContentPane().setLayout(null);
 
-        os.setVisible(true);
+            JPanel taskbar = new JPanel();
+            taskbar.setBounds(0, height - taskbarHeight, width, taskbarHeight);
+            taskbar.setBackground((new Color(barr, barg, barb)));
+            os.getContentPane().add(taskbar);
+            taskbar.setLayout(null);
+
+            JLabel startButton = new JLabel("");
+            startButton.setToolTipText(startToolTip);
+            startButton.setBounds(3, 4, 54, 22);
+            startButton.addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                    infoBox("In arrivo presto", "In arrivo presto!");
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton-Hover.png")));
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                }
+            });
+            taskbar.add(startButton);
+            startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                    "/ml/melonz/histacomrm/win95StartButton.png")));
+
+            Font font = new Font("Microsoft Sans Serif", Font.BOLD, 14);
+
+            JLabel desktopIco1 = new JLabel("");
+            desktopIco1.setToolTipText("Ti dice la versione di Windows.");
+            desktopIco1.setBounds(23, 0, 38, 41);
+            desktopIco1.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
+            desktopIco1.setFont(font);
+            desktopIco1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopIco1);
+
+            JLabel desktopText1 = new JLabel("<html><font color='white'>winver.exe -provvisorio</font></html>");
+            desktopText1.setToolTipText("Ti dice la versione di Windows.");
+            desktopText1.setBounds(3, 30, 78, 45);
+            desktopText1.setFont(font);
+            desktopText1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopText1);
+
+            JPanel background = new JPanel();
+            background.setBackground(new Color(backr, backg, backb));
+            background.setBounds(0, 0, width, height);
+            os.getContentPane().add(background);
+            background.setLayout(null);
+
+            os.setVisible(true);
+    	}
+    	
+    	else if (language == "Nederlands") {
+    		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
+
+            if (noSound == false) {
+                Sound.win95Start.play();
+            }
+
+            os = new JFrame();
+            os.setTitle(title);
+            os.setUndecorated(true);
+            os.setBounds(100, 100, width, height);
+            os.setLocation(0, 0);
+            os.setDefaultCloseOperation(defaultClose);
+            os.getContentPane().setLayout(null);
+
+            JPanel taskbar = new JPanel();
+            taskbar.setBounds(0, height - taskbarHeight, width, taskbarHeight);
+            taskbar.setBackground((new Color(barr, barg, barb)));
+            os.getContentPane().add(taskbar);
+            taskbar.setLayout(null);
+
+            JLabel startButton = new JLabel("");
+            startButton.setToolTipText(startToolTip);
+            startButton.setBounds(3, 4, 54, 22);
+            startButton.addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                    infoBox("Wordt binnenkort verwacht", "Wordt binnenkort verwacht!");
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton-Hover.png")));
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                            "/ml/melonz/histacomrm/win95StartButton.png")));
+                }
+            });
+            taskbar.add(startButton);
+            startButton.setIcon(new ImageIcon(HistacomRewrite.class.getResource(
+                    "/ml/melonz/histacomrm/win95StartButton.png")));
+
+            Font font = new Font("Microsoft Sans Serif", Font.BOLD, 14);
+
+            JLabel desktopIco1 = new JLabel("");
+            desktopIco1.setToolTipText("Laat je de Windows-versie zien.");
+            desktopIco1.setBounds(23, 0, 38, 41);
+            desktopIco1.setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
+            desktopIco1.setFont(font);
+            desktopIco1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopIco1);
+
+            JLabel desktopText1 = new JLabel("<html><font color='white'>winver.exe -tijdelijk</font></html>");
+            desktopText1.setToolTipText("Laat je de Windows-versie zien.");
+            desktopText1.setBounds(3, 30, 78, 45);
+            desktopText1.setFont(font);
+            desktopText1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                    }
+                }
+            });
+            os.getContentPane().add(desktopText1);
+
+            JPanel background = new JPanel();
+            background.setBackground(new Color(backr, backg, backb));
+            background.setBounds(0, 0, width, height);
+            os.getContentPane().add(background);
+            background.setLayout(null);
+
+            os.setVisible(true);
+    	}
+        
     }
 
     public static void initWinVer(String windowsver, String ntversion, String buildnumber, String copyright,
@@ -216,7 +415,7 @@ public class HistacomRewrite {
                     .setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
             winver95.getContentPane().add(winverico);
 
-            JLabel lblcopyright = new JLabel("ï¿½ 1995, Microsoft Corp.");
+            JLabel lblcopyright = new JLabel("© 1995, Microsoft Corp.");
             lblcopyright.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
             lblcopyright.setBounds(73, 109, 177, 26);
             winver95.getContentPane().add(lblcopyright);
@@ -324,9 +523,18 @@ public class HistacomRewrite {
 
             winver95.setVisible(true);
         } else {
-            infoBox("The Windows version " + windowsver
-                    + " does not exist or is still WIP ATM. (NOTE: If you have Windows in the windowsver thing, REMOVE IT!)",
-                    "win" + windowsver + ".winver.nonimp();");
+        	if (language == "English") {
+        		infoBox("The Windows version " + windowsver + " does not exist or is still WIP ATM.", "win" + windowsver + ".winver.nonimp();");
+        	}
+        	
+        	else if (language == "Italiano") {
+        		infoBox("La versione di Windows " + windowsver + " non esiste o è in lavorazione in questo momento.", "win" + windowsver + ".winver.nonimp();");
+        	}
+        	
+        	else if (language == "Nederlands") {
+        		infoBox("De Windows-versie " + windowsver + "  bestaat niet of er wordt op dit moment nog aan gewerkt.", "win" + windowsver + ".winver.nonimp();");
+        	}
+            
         }
     }
 
@@ -336,16 +544,81 @@ public class HistacomRewrite {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @SuppressWarnings("unchecked")
+			public void run() {
                 try {
-                    initMainMenu("Histacom MainMenu", "/ml/melonz/histacomrm/newGame.png", true,
-                            "/ml/melonz/histacomrm/mainMenu.png", 294, 85, 800, 600, JFrame.EXIT_ON_CLOSE,
-                            "Starts da gamz!", 313, 212, 186, 138);
+                	
+                	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+					int width = gd.getDisplayMode().getWidth();
+                    int height = gd.getDisplayMode().getHeight();
+                    
+                	langselect = new JFrame("Language Selector");
+                	langselect.setResizable(false);
+                    langselect.setBounds(height/5, width/5, 400, 140);
+                    langselect.setLayout(new GridLayout(3, 1));
+                    langselect.addWindowListener(new WindowAdapter() {
+                       @SuppressWarnings("unused")
+					public void windowClosing(WindowEvent windowEvent){
+                          System.exit(0);
+                       }        
+                    });  
+                    
+                    JLabel headerLabel = new JLabel("", JLabel.CENTER);        
+                    JLabel statusLabel = new JLabel("",JLabel.CENTER);    
+
+                    statusLabel.setSize(350,100);
+
+                    JPanel controlPanel = new JPanel();
+                    controlPanel.setLayout(new FlowLayout());
+
+                    langselect.add(headerLabel);
+                    langselect.add(controlPanel);
+                    langselect.add(statusLabel);
+                    langselect.setVisible(true);  
+                    
+                    headerLabel.setText("Select the language"); 
+
+                    @SuppressWarnings("rawtypes")
+					final DefaultComboBoxModel fruitsName = new DefaultComboBoxModel();
+
+                    fruitsName.addElement("English");
+                    fruitsName.addElement("Italiano");
+                    fruitsName.addElement("Nederlands");
+
+                    @SuppressWarnings("rawtypes")
+					final JComboBox fruitCombo = new JComboBox(fruitsName);    
+                    fruitCombo.setSelectedIndex(0);
+
+                    JScrollPane fruitListScrollPane = new JScrollPane(fruitCombo);    
+                    JButton showButton = new JButton("OK");
+                    
+                    showButton.addActionListener(new ActionListener() {
+                       public void actionPerformed(ActionEvent e) { 
+                          if (fruitCombo.getSelectedIndex() != -1) {                     
+                             language = (String) fruitCombo.getItemAt(fruitCombo.getSelectedIndex());             
+                          }             
+                          if (language == "English") {
+                        	  initMainMenu("Histacom Main Menu", "/ml/melonz/histacomrm/newGame.png", false, "/ml/melonz/histacomrm/mainMenu.png", height/3, width/3, 800, 600, JFrame.EXIT_ON_CLOSE, "Starts the game!", 303, 250, 186, 138);
+                          }
+                          
+                          else if (language == "Italiano") {
+                        	  initMainMenu("Menù principale di Histacom", "/ml/melonz/histacomrm/newGame.png", false, "/ml/melonz/histacomrm/mainMenu.png", height/3, width/3, 800, 600, JFrame.EXIT_ON_CLOSE, "Comincia il gioco!", 303, 250, 186, 138);
+                          }
+                          
+                          else if (language == "Nederlands") {
+                        	  initMainMenu("Histacom Hoofdmenu", "/ml/melonz/histacomrm/newGame.png", false, "/ml/melonz/histacomrm/mainMenu.png", height/3, width/3, 800, 600, JFrame.EXIT_ON_CLOSE, "Start het spel!", 303, 250, 186, 138);
+                          }
+                       }
+                    }); 
+                    controlPanel.add(fruitListScrollPane);          
+                    controlPanel.add(showButton);    
+                    langselect.setVisible(true);  
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
+    
 }
-
