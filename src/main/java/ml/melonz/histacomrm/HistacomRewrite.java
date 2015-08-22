@@ -51,6 +51,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.sun.glass.events.WindowEvent;
+import ml.melonz.histacomrm.util.Language;
 
 public class HistacomRewrite {
 
@@ -86,12 +87,12 @@ public class HistacomRewrite {
                     		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Shows all of your installed programs.");
                     	}
                     	else if (language == "Italiano") {
-                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Ti fà vedere tuttle le applicazioni installate.");
+                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Ti fï¿½ vedere tuttle le applicazioni installate.");
                     	}
                     	else if (language == "Nederlands") {
-                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Laat alle programma's die geïnstalleerd zijn zien.");
+                    		initOS("Windows 95", JFrame.EXIT_ON_CLOSE, false, 30, 192, 192, 192, 0, 192, 192, "Laat alle programma's die geï¿½nstalleerd zijn zien.");
                     	}
-                        
+
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -180,7 +181,7 @@ public class HistacomRewrite {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (e.getClickCount() == 2 && !e.isConsumed()) {
-                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
                     }
                 }
             });
@@ -269,7 +270,7 @@ public class HistacomRewrite {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (e.getClickCount() == 2 && !e.isConsumed()) {
-                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
                     }
                 }
             });
@@ -283,7 +284,7 @@ public class HistacomRewrite {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (e.getClickCount() == 2 && !e.isConsumed()) {
-                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
                     }
                 }
             });
@@ -358,7 +359,7 @@ public class HistacomRewrite {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (e.getClickCount() == 2 && !e.isConsumed()) {
-                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
                     }
                 }
             });
@@ -372,7 +373,7 @@ public class HistacomRewrite {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (e.getClickCount() == 2 && !e.isConsumed()) {
-                        initWinVer("95", "nonnt-ver4", "950", "© 1995, Microsoft Corp.", "legalthingynoonewillsee");
+                        initWinVer("95", "nonnt-ver4", "950", "ï¿½ 1995, Microsoft Corp.", "legalthingynoonewillsee");
                     }
                 }
             });
@@ -415,7 +416,7 @@ public class HistacomRewrite {
                     .setIcon(new ImageIcon(HistacomRewrite.class.getResource("/ml/melonz/histacomrm/winverico.png")));
             winver95.getContentPane().add(winverico);
 
-            JLabel lblcopyright = new JLabel("© 1995, Microsoft Corp.");
+            JLabel lblcopyright = new JLabel("ï¿½ 1995, Microsoft Corp.");
             lblcopyright.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
             lblcopyright.setBounds(73, 109, 177, 26);
             winver95.getContentPane().add(lblcopyright);
@@ -528,7 +529,7 @@ public class HistacomRewrite {
         	}
         	
         	else if (language == "Italiano") {
-        		infoBox("La versione di Windows " + windowsver + " non esiste o è in lavorazione in questo momento.", "win" + windowsver + ".winver.nonimp();");
+        		infoBox("La versione di Windows " + windowsver + " non esiste o ï¿½ in lavorazione in questo momento.", "win" + windowsver + ".winver.nonimp();");
         	}
         	
         	else if (language == "Nederlands") {
@@ -602,7 +603,7 @@ public class HistacomRewrite {
                           }
                           
                           else if (language == "Italiano") {
-                        	  initMainMenu("Menù principale di Histacom", "/ml/melonz/histacomrm/newGame.png", false, "/ml/melonz/histacomrm/mainMenu.png", height/3, width/3, 800, 600, JFrame.EXIT_ON_CLOSE, "Comincia il gioco!", 303, 250, 186, 138);
+                        	  initMainMenu("Menï¿½ principale di Histacom", "/ml/melonz/histacomrm/newGame.png", false, "/ml/melonz/histacomrm/mainMenu.png", height/3, width/3, 800, 600, JFrame.EXIT_ON_CLOSE, "Comincia il gioco!", 303, 250, 186, 138);
                           }
                           
                           else if (language == "Nederlands") {

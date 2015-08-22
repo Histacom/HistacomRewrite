@@ -1,0 +1,5 @@
+# Locale information
+local.name = English (British)
+
+# Windows 95
+w95.startToolTip = Shows all of your installed programs.
