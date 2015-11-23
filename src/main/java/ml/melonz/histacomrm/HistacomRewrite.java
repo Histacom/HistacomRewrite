@@ -1,5 +1,5 @@
 /*
- * This file is part of Histacom 2, licensed under the MIT License (MIT)
+ * This file is part of Histacom 2, licensed under the MIT License (MIT).
  *
  * Copyright (c) 2015, Histacom Development Team <http://histacom.jamierocks.uk/>
  *
@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package ml.melonz.histacomrm;
 
 import java.awt.Color;
